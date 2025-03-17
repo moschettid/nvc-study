@@ -35,7 +35,7 @@ def gen_voltage_digraph(G, gen_type, art_nodes_qty):
         cumulate.append(cumulate[-1] + art_nodes_qty[i])
     
     VG = nx.DiGraph()
-    VG.add_nodes_from(range(G.number_of_nodes()))
+    VG.add_nodes_from(range(cumulate[-1]))
     for edge in G.edges:
         source, target = edge
         ssize, tsize = art_nodes_qty[source], art_nodes_qty[target]
@@ -100,7 +100,7 @@ def gen_voltage_graph(G, art_nodes_qty):
         raise ValueError("G must be an undirected graph")
     
     VG = nx.Graph()
-    VG.add_nodes_from(range(G.number_of_nodes()))
+    VG.add_nodes_from(range(G.number_of_nodes()*art_nodes_qty))
     for edge in G.edges:
         source, target = edge
         perm = random.sample(range(art_nodes_qty), art_nodes_qty)
@@ -132,7 +132,7 @@ def gen_strong_voltage_digraph(G, art_nodes_qty):
         raise ValueError("G must be a directed graph")
     
     VG = nx.DiGraph()
-    VG.add_nodes_from(range(G.number_of_nodes()))
+    VG.add_nodes_from(range(G.number_of_nodes()*art_nodes_qty))
     for edge in G.edges:
         source, target = edge
         perm = random.sample(range(art_nodes_qty), art_nodes_qty)
