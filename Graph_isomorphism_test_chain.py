@@ -197,21 +197,19 @@ def color_refinement(G):
 
 
 
-nodes = [100, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 3000, 4000]
-
 records = {}
-for n in nodes:
+for n in range(200, 3600, 200):
     print("Nodes: ", n)
     print("Generating graph", end="")
     t1  = time.time()
     G = nx.DiGraph()
-    G.add_nodes_from(range(0,2*n+1))
-    for i in range(n,2*n-1):
+    G.add_nodes_from(range(0,n+1))
+    for i in range(n//2,n-1):
         G.add_edge(i,i+1)
-    for i in range(0,n):
-        for j in range(0,n):
+    for i in range(0,n//2):
+        for j in range(0,n//2):
             G.add_edge(i,j)
-    G.add_edge(n-1, n)
+    G.add_edge(n//2 -1, n//2)
     t2 = time.time()
     print(" - generated in ", t2-t1)
     VG = G
