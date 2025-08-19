@@ -198,14 +198,7 @@ for n in range(200, 3600, 200):
     print("Nodes: ", n)
     print("Generating graph", end="")
     t1  = time.time()
-    G = nx.DiGraph()
-    G.add_nodes_from(range(0,n+1))
-    for i in range(n//2,n-1):
-        G.add_edge(i,i+1)
-    for i in range(0,n//2):
-        for j in range(0,n//2):
-            G.add_edge(i,j)
-    G.add_edge(n//2 -1, n//2)
+    G = nx.fast_gnp_random_graph(n, 10/n, directed=True)
     t2 = time.time()
     print(" - generated in ", t2-t1)
     VG = G
